@@ -14,6 +14,7 @@ BuildArch:      noarch
 BuildRequires:  python3-devel
 BuildRequires:  python3dist(python-levenshtein) >= 0.12
 BuildRequires:  python3dist(setuptools)
+BuildRequires:  python3dist(pycodestyle)
 
 %description
 FuzzyWuzzy Fuzzy string matching like a boss. It uses Levenshtein Distance < to
