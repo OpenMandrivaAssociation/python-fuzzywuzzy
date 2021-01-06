@@ -1,2 +1,2 @@
 # python-fuzzywuzzy
-pytest support
+python-build support
