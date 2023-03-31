@@ -3,7 +3,7 @@
 
 Name:           python-%{pypi_name}
 Version:        0.18.0
-Release:        1
+Release:        2
 Summary:        Fuzzy string matching in python
 Group:          Development/Python
 License:        GPLv2
