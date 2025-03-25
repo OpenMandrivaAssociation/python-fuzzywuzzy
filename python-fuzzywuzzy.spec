@@ -1,20 +1,21 @@
 # Created by pyp2rpm-3.3.5
-%global pypi_name fuzzywuzzy
+%global module fuzzywuzzy
 
-Name:           python-%{pypi_name}
-Version:        0.18.0
-Release:        2
-Summary:        Fuzzy string matching in python
-Group:          Development/Python
-License:        GPLv2
-URL:            https://github.com/seatgeek/fuzzywuzzy
-Source0:        %{pypi_name}-%{version}.tar.gz
-BuildArch:      noarch
+Name:		python-%{module}
+Version:	0.18.0
+Release:	3
+Summary:	Fuzzy string matching in python
+Group:		Development/Python
+License:	GPL-2.0-only
+URL:		https://github.com/seatgeek/fuzzywuzzy
+Source0:	https://files.pythonhosted.org/packages/source/o/%{module}/%{module}-%{version}.tar.gz
+BuildArch:	noarch
 
-BuildRequires:  python3-devel
-BuildRequires:  python3dist(python-levenshtein) >= 0.12
-BuildRequires:  python3dist(setuptools)
-BuildRequires:  python3dist(pycodestyle)
+BuildRequires:	pkgconfig(python3)
+BuildRequires:	python-levenshtein >= 0.12
+BuildRequires:	python-setuptools
+BuildRequires:	python-pycodestyle
+BuildRequires:	python-pytest
 
 %description
 FuzzyWuzzy Fuzzy string matching like a boss. It uses Levenshtein Distance < to
@@ -24,9 +25,11 @@ package.Requirements - Python 2.7 or higher - difflib - python-Levenshtein <
 differing results for certain cases <
 
 %prep
-%autosetup -n %{pypi_name}-%{version}
+%autosetup -n %{module}-%{version}
 # Remove bundled egg-info
 rm -rf %{pypi_name}.egg-info
+# Remove shebangs
+sed -i '1{/^#!/d}' fuzzywuzzy/*.py
 
 %build
 %py3_build
@@ -35,10 +38,10 @@ rm -rf %{pypi_name}.egg-info
 %py3_install
 
 %check
-%{__python3} setup.py test
+%{__python3} test_fuzzywuzzy.py
 
-%files -n python-%{pypi_name}
-%license LICENSE.txt
+%files -n python-%{module}
+%{python3_sitelib}/%{module}/
+%{python3_sitelib}/%{module}-%{version}-py%{python3_version}.egg-info
 %doc README.rst
-%{python3_sitelib}/%{pypi_name}/
-%{python3_sitelib}/%{pypi_name}-%{version}-py%{python3_version}.egg-info
+%license LICENSE.txt
