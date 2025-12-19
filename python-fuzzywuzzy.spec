@@ -9,13 +9,14 @@ Group:		Development/Python
 License:	GPL-2.0-only
 URL:		https://github.com/seatgeek/fuzzywuzzy
 Source0:	https://files.pythonhosted.org/packages/source/o/%{module}/%{module}-%{version}.tar.gz
+BuildSystem:	python
 BuildArch:	noarch
 
-BuildRequires:	pkgconfig(python3)
-BuildRequires:	python-levenshtein >= 0.12
-BuildRequires:	python-setuptools
-BuildRequires:	python-pycodestyle
-BuildRequires:	python-pytest
+BuildRequires:	pkgconfig(python)
+BuildRequires:	python%{pyver}dist(levenshtein) >= 0.12
+BuildRequires:	python%{pyver}dist(setuptools)
+BuildRequires:	python%{pyver}dist(pycodestyle)
+BuildRequires:	python%{pyver}dist(pytest)
 
 %description
 FuzzyWuzzy Fuzzy string matching like a boss. It uses Levenshtein Distance < to
@@ -27,21 +28,15 @@ differing results for certain cases <
 %prep
 %autosetup -n %{module}-%{version}
 # Remove bundled egg-info
-rm -rf %{pypi_name}.egg-info
+rm -rf %{module}.egg-info
 # Remove shebangs
 sed -i '1{/^#!/d}' fuzzywuzzy/*.py
 
-%build
-%py3_build
-
-%install
-%py3_install
-
 %check
-%{__python3} test_fuzzywuzzy.py
+%{__python} test_fuzzywuzzy.py
 
-%files -n python-%{module}
-%{python3_sitelib}/%{module}/
-%{python3_sitelib}/%{module}-%{version}-py%{python3_version}.egg-info
+%files
+%{python_sitelib}/%{module}/
+%{python_sitelib}/%{module}-%{version}-py%{pyver}.egg-info
 %doc README.rst
 %license LICENSE.txt
