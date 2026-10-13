@@ -3,7 +3,7 @@
 
 Name:		python-%{module}
 Version:	0.18.0
-Release:	4
+Release:	5
 Summary:	Fuzzy string matching in python
 Group:		Development/Python
 License:	GPL-2.0-only
@@ -12,7 +12,7 @@ Source0:	https://files.pythonhosted.org/packages/source/o/%{module}/%{module}-%{
 BuildSystem:	python
 BuildArch:	noarch
 
-BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(python3)
 BuildRequires:	python%{pyver}dist(levenshtein) >= 0.12
 BuildRequires:	python%{pyver}dist(setuptools)
 BuildRequires:	python%{pyver}dist(pycodestyle)
